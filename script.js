@@ -1,3 +1,4 @@
+//Model
 let app = document.getElementById("app");
 let alfabet = "abcdefghijklmnopqrstuvwxyz æøå";
 let morsekode = [
@@ -34,27 +35,29 @@ let morsekode = [
 ];
 let ordFraInput = " ";
 let ordSomErOversatt = " ";
+let text = "";
 
+//View
 updateView();
 function updateView() {
     app.innerHTML = /*html*/ `
-            Skriv her og oversett til morsekode:
-        <input type="text" onchange="oversetter(this)"> 
-        <div class="textClass">
-       
-        ${ordFraInput} 
-        <p>${ordSomErOversatt}</p>
+        <div class="text">Skriv her og oversett til morsekode:</div>
+        <input class="input" type="text" onchange="text = this.value"> 
+        <button class="knapp" onclick="translateText(text)">Oversett</button>
+        <div class="answer">
+            <p>${ordFraInput}</p> 
+            <p>${ordSomErOversatt}</p>
         </div>
     `;
 }
 
-function oversetter(fraInput) {
-    ordFraInput = fraInput.value.toUpperCase();
-    for (letter of fraInput.value) {
-        let enkeltOrdFraInput = ord;
-        let ordIndex = alfabet.indexOf(enkeltOrdFraInput);
-        ordOversattTilMorsekode += morsekode[ordIndex] + " ";
+//Controller
+function translateText(fraInput) {
+    ordSomErOversatt = "";
+    ordFraInput = fraInput.toLowerCase();
+    for (letter of ordFraInput) {
+        let letterIndex = alfabet.indexOf(letter);
+        ordSomErOversatt += morsekode[letterIndex] + " ";
     }
     updateView();
-    ordOversattTilMorsekode = " ";
 }
